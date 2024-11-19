@@ -1,8 +1,11 @@
 package com.example.shoppro.repository;
 
 import com.example.shoppro.entity.Item;
+import com.querydsl.core.BooleanBuilder;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,10 +32,18 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // 가겨으로 검색
     public List<Item> findByPriceLessThan (Integer price);
+    public List<Item> findByPriceGreaterThan (Integer price);
+    public List<Item> findByPriceGreaterThanOrderByPriceAsc (Integer price);
+
+    //페이징처리된 초과이면서 같은거
+    public List<Item> findByPriceGreaterThanEqual(Integer price, Pageable pageable);
 
     //정렬까지 추가
-
     List<Item> findByPriceLessThanOrderByPriceDesc  (Integer price);
+
+    //nativeQuery 사용
+    @Query(value = "select * from Item i  where i.item_nm = :itemNm",nativeQuery = true)
+    List<Item> nativeQuerySelectwhereNamelike(String itemNm, Pageable pageable);
 
 
 

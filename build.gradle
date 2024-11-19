@@ -4,6 +4,13 @@ buildscript {
     }
 }
 
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+
 
 plugins {
     id 'java'
@@ -45,6 +52,16 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
     implementation 'org.modelmapper:modelmapper:3.1.0'
 
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
+
+
+    annotationProcessor(
+            "jakarta.persistence:jakarta.persistence-api",
+            "jakarta.annotation:jakarta.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
@@ -58,6 +75,7 @@ dependencies {
             "jakarta.annotation:jakarta.annotation-api",
             "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
 
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
 
 }
 

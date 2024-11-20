@@ -28,9 +28,9 @@ public class SecurityConfig {
                 // 권한 페이지 접속권한
                 .authorizeHttpRequests(
                         authorization -> authorization
-                                .requestMatchers("/user/login/**").permitAll() // 로그인페이지는 누구나 접속이 가능한 권한 , permitAll() 권한을 뜻함
+                                .requestMatchers("/members/login/**").permitAll() // 로그인페이지는 누구나 접속이 가능한 권한 , permitAll() 권한을 뜻함
                                 .requestMatchers("/board/register").authenticated() // 로그인 한 사람만 접속 가능
-                                .requestMatchers("/item/register").hasRole("ADMIN") //
+                                .requestMatchers("/admin/**").hasRole("ADMIN") //
                                 .requestMatchers("/user/list").hasRole("ADMIN") //
                                 .anyRequest().permitAll()   // 그외 다 열어
 //                            .anyRequest().authenticated() // 그 이외에는 다 로근인해서 접속해
@@ -43,15 +43,15 @@ public class SecurityConfig {
 
                 // 로그인
                 .formLogin(
-                        formLogin -> formLogin.loginPage("/user/login")         // 기본 로그인 페이지 지정
-                                .defaultSuccessUrl("/user/login")                         // 로그인이 성공했다면
+                        formLogin -> formLogin.loginPage("/members/login")         // 기본 로그인 페이지 지정
+                                .defaultSuccessUrl("/")                         // 로그인이 성공했다면
                                 .usernameParameter("email")                // 로그인 <input name= "email">
                         // 컨트롤러로 보낼때~~
                 )
                 // 로그아웃
                 .logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))           // 로그아웃 a태그라 생각
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))           // 로그아웃 a태그라 생각
                                 //<a href="/user/logout">잘가~~</a>
                                 .invalidateHttpSession(true)                    // 세션초기화
                                 .logoutSuccessUrl("/")                          //localhost:8090으로 간다.
@@ -60,9 +60,9 @@ public class SecurityConfig {
                 )
 
         // 예외처리 // 로그인이 되지 않은 사용자 , 권한이 없는 사용자 접속시 취할 행동들
-                /*.exceptionHandling(
-                        a -> a.
-                )*/
+                .exceptionHandling(
+                        a -> a.authenticationEntryPoint(new CustomAuthenticationEntryPoint()).accessDeniedHandler(new CustomAccessDeniedHandler())
+                )
 
         ;
         return httpSecurity.build();

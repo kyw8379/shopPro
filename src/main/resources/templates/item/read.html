@@ -10,14 +10,113 @@
 <body>
 <th:block layout:fragment="content">
 
-    [[${itemDTO}]]
 
-    <th:block th:if="${not #lists.isEmpty(itemDTO.getItemImgDTOList())}"
-              th:each="img: ${itemDTO.itemImgDTOList}">
+    <div class="row mt-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <img width="100%" th:src="${itemDTO.getItemImgDTOList().get(0).imgUrl}" class="rounded">
+                                </div>
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <h1>가격</h1>
+                                            </div>
+                                            <div class="row">
+                                                <h1>가격</h1>
+                                            </div>
+                                            <div class="row">
+                                                <h1>가격</h1>
+                                            </div>
+                                            <div class="row">
+                                                <h1>가격</h1>
+                                            </div>
+                                            <div class="row">
+                                                <h1>가격</h1>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-end">
+                                                    <button class="btn btn-primary">장바구니</button>
+                                                    <button class="btn btn-primary">주문하기</button>
 
-        <img th:src="${img.getImgUrl()}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
 
-    </th:block>
+                                    제품에 대한 설명을 <br>
+                                    제품에 대한 설명을 <br>
+                                    제품에 대한 설명을 <br>
+                                    제품에 대한 설명을 <br>
+                                    제품에 대한 설명을 <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">상세설명</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">리뷰</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <div class="row text-center">
+                                        <div class="col">
+                                            <th:block th:if="${not #lists.isEmpty(itemDTO.getItemImgDTOList())}"
+                                                      th:each="img: ${itemDTO.itemImgDTOList}">
+
+                                                <img th:src="${img.getImgUrl()}">
+
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                    이렇구나
+
+                                </div>
+                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
+                                <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
 
 
 </th:block>

@@ -5,7 +5,7 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>아이템 등록</title>
+    <title>아이템 수정</title>
 </head>
 <body>
 <th:block layout:fragment="content">
@@ -64,6 +64,37 @@
 
                         </div>
 
+                        <div class="col-12">
+                            <div class="mb-3 ">
+                                <th:block th:each="img: ${itemDTO.itemImgDTOList}">
+
+                                        <th:block th:if="${img.repimgYn == 'Y'}">
+                                            <div class="row main imgpreview">
+                                                <div class="col-12">
+                                                    대표이미지
+                                                    <img width="100%" th:src="${img.imgUrl}">
+                                                    <button type="button" th:value="${img.id}">삭제</button>
+                                                </div>
+                                            </div>
+                                        </th:block>
+
+                                </th:block>
+                                <div class="row imgpreviewinput imgpreview">
+                                    <th:block th:each="img: ${itemDTO.itemImgDTOList}">
+
+                                            <th:block th:unless="${img.repimgYn == 'Y'}">
+
+                                                    <div class="col">
+                                                        <img width="100%" th:src="${img.imgUrl}">
+                                                        <button type="button" th:value="${img.id}">삭제</button>
+                                                    </div>
+
+                                            </th:block>
+
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
 
 
                         <div class="mb-3 imgA">
@@ -164,7 +195,6 @@
                        //클래스중에 mainimg가 있다면
                        console.log("이건 대표이미지 인풋입니다.")
                        readURL(this);
-                       $(".mainimg").val()
 
                    }else {
                        readURL1(this);
@@ -185,15 +215,7 @@
 
                        inputtag.type = "file"
                        inputtag.name = "multipartFile"
-                       // inputtag.files = input.files
-                       const dataTranster = new DataTransfer();
-                       const fileDatas = Array.from(input.files);
-/*신규 파일데이터는..
-new DataTransfer();
-이걸로 files 라는 객체를 만들수 있어서..
-이걸로 만들어서 배열 돌리면서 추가추가 한거임*/
-                       fileDatas.forEach(file =>  dataTranster.items.add(file) );
-                       inputtag.files = dataTranster.files;
+                       inputtag.files = input.files
 
                        let str1 = ` <div class="preview col">
                                   <img width="100%" src="${e.target.result}">
@@ -201,11 +223,9 @@ new DataTransfer();
                                 </div>`
                        $(".main").html(str1)
                        $(".main").find('div:eq(0)').append(inputtag)
-                       $(".imgInput").val("")
 
                    };
                    reader.readAsDataURL(input.files[0]);
-
 
                }
            }
@@ -217,11 +237,7 @@ new DataTransfer();
                        let inputtag = document.createElement("input")
                        inputtag.type = "file"
                        inputtag.name = "multipartFile"
-                       /*inputtag.files = input.files*/
-                       const dataTranster = new DataTransfer();
-                       const $fileDatas = Array.from(input.files);
-                       $fileDatas.forEach(file =>  dataTranster.items.add(file) );
-                       inputtag.files = dataTranster.files;
+                       inputtag.files = input.files
 
                        let str1 = ` <div class="preview col">
                                   <img width="100%" src="${e.target.result}">
@@ -232,13 +248,10 @@ new DataTransfer();
                        $(".imgpreviewinput").find('div:eq(0)').prepend(inputtag)
                        $(".imgpreviewinput").find('input:eq(0)').hide()
 
-                       $(".imgInput").val("")
-
                    };
                    reader.readAsDataURL(input.files[0]);
 
                }
-
            }
 
 

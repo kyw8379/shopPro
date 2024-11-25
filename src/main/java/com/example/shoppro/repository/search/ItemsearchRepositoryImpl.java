@@ -77,7 +77,7 @@ public class ItemsearchRepositoryImpl extends QuerydslRepositorySupport implemen
         System.out.println("----------------------------");
 
         query.where(item.id.gt(0L));   // select * from board //   // board.bno > 0
-        query.where(item.createBy.eq(email));   // select * from board //  현재 판매자
+        query.where(item.createBy.eq(email));   // select * from item  where item.createBy = ':email' //  현재 판매자
 
         System.out.println(query);
         System.out.println("----------------------------");

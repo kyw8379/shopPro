@@ -64,6 +64,19 @@ public class ItemService {
 
         return itemDTO;
     }
+    public ItemDTO read(Long id, String email){
+
+
+        Item item =
+                itemRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+
+        ItemDTO itemDTO = modelMapper.map(item, ItemDTO.class)
+                .setItemImgDTOList(item.getItemImgList());
+
+
+
+        return itemDTO;
+    }
 
 
 

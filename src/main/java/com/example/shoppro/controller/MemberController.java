@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.crypto.interfaces.PBEKey;
+import java.security.Principal;
 
 @RequestMapping("/members")
 @Controller
@@ -65,6 +66,8 @@ public class MemberController {
 
         return  null;
     }
+
+
 
 
 

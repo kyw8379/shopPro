@@ -56,25 +56,24 @@
                     </div>
                     <div class="col-12">
                         <div class="mb-3 imgA">
-
-                            <div class="row">
                             <th:block th:each="img: ${itemDTO.itemImgDTOList}">
-                                <th:block th:if="${img.repimgYn == 'Y'}">
-                                    <div class="col-12">
-                                        대표이미지
-                                        <img width="100%" th:src="${img.imgUrl}">
-                                    </div>
+                                <div class="row">
 
-                                </th:block>
+                                    <th:block th:if="${img.repimgYn == 'Y'}">
+                                        <div class="col-12">
+                                            대표이미지
+                                            <img width="100%" th:src="${img.imgUrl}">
+                                        </div>
 
-                                <th:block th:unless="${img.repimgYn == 'Y'}">
-                                    <div class="col">
-                                        <img width="100%" th:src="${img.imgUrl}">
-                                    </div>
-                                </th:block>
-                            </div>
+                                    </th:block>
+
+                                    <th:block th:unless="${img.repimgYn == 'Y'}">
+                                        <div class="col">
+                                            <img width="100%" th:src="${img.imgUrl}">
+                                        </div>
+                                    </th:block>
+                                </div>
                             </th:block>
-
                         </div>
                     </div>
 

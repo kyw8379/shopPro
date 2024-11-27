@@ -43,7 +43,7 @@ public class ItemController {
     }
     @PostMapping("/admin/item/new")
     public String itemFormPost(@Valid ItemDTO itemDTO, BindingResult bindingResult,
-                               List<MultipartFile> multipartFile, Model model){
+                               List<MultipartFile> multipartFile ,Model model){
         //들어오는값 확인
         log.info("들어오는값 확인" + itemDTO);
 
@@ -151,8 +151,70 @@ public class ItemController {
             return "redirect:/admin/item/list";
         }
 
+    }
+
+
+    @PostMapping("/admin/item/update")
+    public String itemupdate(@Valid ItemDTO itemDTO, BindingResult bindingResult,  List<MultipartFile> multipartFiles,   Integer[] delino, Long mainino) {
+
+
+        if (bindingResult.hasErrors()){
+            log.info("유효성검사 에러");
+            log.info(bindingResult.getAllErrors()); //확인된 모든 에러 콘솔창 출력
+
+
+            return "/item/update";        //다시 이전 페이지
+        }
+
+        itemService.update(itemDTO, itemDTO.getId(), multipartFiles, delino, mainino);
+
+
+        return null;
+    }
+
+
+    @PostMapping("/admin/item/del")
+    public String delitem(Long id){
+
+        log.info("삭제할 아이템번호 : " + id);
+
+        itemService.remove(id);
+
+
+        return "redirect:/admin/item/list";
+    }
+
+    @GetMapping("/item/read")
+    public String read(Long id, Model model, RedirectAttributes redirectAttributes){
+
+        try {
+            ItemDTO itemDTO =
+                    itemService.read(id);
+
+            model.addAttribute("itemDTO", itemDTO);
+
+            return "item/itemDtl";
+
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("msg", "존재하지 않는 상품입니다.");
+            return "redirect:/";
+            //item/list?msg=존재하지
+        }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

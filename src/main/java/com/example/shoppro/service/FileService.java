@@ -44,6 +44,19 @@ public class FileService {
         return savedFileName;
     }
 
+    public void removefile(String imgName){
+        String delFileurl = itemImgLocation + "/" + imgName;
+        System.out.println(delFileurl);
+        System.out.println(delFileurl);
+        System.out.println(delFileurl);
+        System.out.println(delFileurl);
+        File file = new File(delFileurl);
+
+        if (file.exists()){//파일존재여부확인
+            file.delete();
+        }
+    }
+
 
 
 

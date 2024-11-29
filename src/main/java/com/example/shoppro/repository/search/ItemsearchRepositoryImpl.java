@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class ItemsearchRepositoryImpl extends QuerydslRepositorySupport implemen
     public Page<Item> getAdminItemPage(PageRequestDTO pageRequestDTO, Pageable pageable, String email) {
         //만들기능들 : 판매중 품절 여부, 날짜에 따른 검색 , 만든이 (중요) , 아이템 이름
 //select * from item where reg= ww;
+
+
 
 
         QItem item = QItem.item;        // q 도메인 객체 entity를 QItem로 바꾼것
@@ -77,6 +80,7 @@ public class ItemsearchRepositoryImpl extends QuerydslRepositorySupport implemen
         System.out.println("----------------------------");
 
         query.where(item.id.gt(0L));   // select * from board //   // board.bno > 0
+
         query.where(item.createBy.eq(email));   // select * from item  where item.createBy = ':email' //  현재 판매자
 
         System.out.println(query);

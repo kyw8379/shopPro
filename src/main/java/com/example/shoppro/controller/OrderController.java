@@ -46,7 +46,8 @@ public class OrderController {
     public   ResponseEntity order(@Valid OrderDTO orderDTO, BindingResult bindingResult , Principal principal){
 
 
-
+        //만약에 아이템id가 없다면
+        //만약에 수량이 없다면
         // 유효성검사
         if(bindingResult.hasErrors()){
             StringBuffer sb = new StringBuffer();       //String
@@ -90,9 +91,7 @@ public class OrderController {
         log.info("진입");
         if(principal ==null){
             log.info("로그인이 필요함");
-            log.info("로그인이 필요함");
-            log.info("로그인이 필요함");
-            log.info("로그인이 필요함");
+
 
             return "redirect:/members/login";
         }
@@ -106,12 +105,44 @@ public class OrderController {
         orderService.getOrderList(email, pageable);
         //페이징처리에 필요하던것들 start end next pre t/f   total
 
+        //단방향이라면
+        //order , orderItem을 가져온다.  pk값 email을 가지고 가져온다.
+
         model.addAttribute("orders" , orderHistDTOPage);
         //html 들어가서 getContent() 함수 호출
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage", 5);
 
         return "order/orderHist";
+    }
+
+    @PostMapping("/order/{orderId}/cancel")
+    public  ResponseEntity cancelOrder(
+            @PathVariable("orderId") Long orderId , Principal principal){
+
+        //orderId 는 취소할 orderId 이다 .
+        //orderId를 삭제하고 , orderItem에서 orderId를 참조하고 있는 orderItem을 삭제한다.
+        // 단방향일경우 orderItem을 먼저 삭제(자식부터 삭제) 하고
+        // orderId를 삭제 하면 된다. 부모에 달린 댓글을 먼저 삭제하고 부모글을 지운다
+        log.info("취소할 주문번호" + orderId);
+        log.info("최소할 주문번호로 달린 아이템들");
+
+        if(!orderService.validateOrder(orderId, principal.getName())){
+            //내 제품이 아니다.
+
+            return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
+
+        }
+
+
+        //취소를 한다. orderStatus를 cancel로 바꾸고 , 주문했던 아이템들의 수량도 돌려놓고
+        // 주문에 달린 주문아이템들은 데이터를 가지고 있다.
+
+        orderService.cancelOrder(orderId);
+
+
+        return new ResponseEntity<Long >(orderId, HttpStatus.OK);
+
     }
 
 

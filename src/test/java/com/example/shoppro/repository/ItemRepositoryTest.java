@@ -235,7 +235,6 @@ class ItemRepositoryTest {
                 booleanBuilder.and(qItem.itemSellStatus.eq(ItemSellStatus.SOLD_OUT));
             }
         }
-
         JPAQuery<Item> query =
                 queryFactory.selectFrom(qItem)
                         .where(booleanBuilder)

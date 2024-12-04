@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class OrderHistDTO {
 
     private Long orderId; //주문아이디
 
-    private String orderDate; //주문날짜
+    private LocalDateTime orderDate; //주문날짜
 
     private OrderStatus orderStatus;//주문상태
 
@@ -34,10 +35,10 @@ public class OrderHistDTO {
 
     }
 
+    public OrderHistDTO setOrderItemDTOList(List<OrderItemDTO> orderItemDTOList) {
 
+        this.orderItemDTOList = orderItemDTOList;
 
-
-
-
-
+        return this;
+    }
 }

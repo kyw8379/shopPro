@@ -9,12 +9,33 @@
 </head>
 <body>
 
-    <th:block layout:fragment="content">
-        <div>
-            zzzzzzzz
-        </div>
+<th:block layout:fragment="content">
+    <div class="row">
+        <form action="/category/register" method="post">
+            카테고리명 : <input type="text" name="caname">
+            <button>카테코리저장</button>
+        </form>
+    </div>
+    <hr>
 
-    </th:block>
+    <div class="row">
+        <form action="/category/register" method="post">
+
+            게시판 종류선택 :
+            <select name="caid">
+                  <th:block th:each="list: ${calist}">
+                      <option th:value="${list.id}" th:text="${list.caname}"></option>
+                  </th:block>
+            </select>
+
+            <br>
+
+            게시판 제목 : <input type="text" name="title">
+            <button>카테코리저장</button>
+        </form>
+    </div>
+
+</th:block>
 
 
 

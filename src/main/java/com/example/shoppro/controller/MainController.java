@@ -46,6 +46,8 @@ public class MainController {
         // start, end, pre, next 이런것들 총페이지수 등등
         model.addAttribute("pageResponseDTO", pageResponseDTO);
 
+
+
         return "main";
 
     }

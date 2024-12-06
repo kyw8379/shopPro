@@ -47,6 +47,10 @@ public class Order extends BaseTimeEntity {
         this.orderItemList.add(item);
     }
 
+    public void setOrderItemList(List<OrderItem>  orderItemList ) {
+        this.orderItemList = orderItemList;
+    }
+
     private LocalDateTime orderDate;  //주문일
 
 

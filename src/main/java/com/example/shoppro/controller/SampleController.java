@@ -33,11 +33,11 @@ public class SampleController {
 
     }
 
-    @PostMapping("/category/register")
-    public String save(CategoryDTO categoryDTO){
-        CategoryService.
-
-    }
+//    @PostMapping("/category/register")
+//    public String save(CategoryDTO categoryDTO){
+//        CategoryService.
+//
+//    }
 
 
 }
